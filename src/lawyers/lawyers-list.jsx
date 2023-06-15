@@ -1,5 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const lawyers = [{
     id: 1,
@@ -18,15 +19,15 @@ const lawyers = [{
     region: 'Hawaii',
 }];
 
-const columns = [
-  { field: "id", headerName: 'ID' },
-  { field: "firstName", headerName: 'First Name' },
-  { field: "lastName", headerName: 'Last Name' },
-  { field: "region", headerName: 'Region' },
-];
-
 function LawyersList() {
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
+  const columns = [
+    { field: "firstName", headerName: t("First Name") },
+    { field: "lastName", headerName: t("Last Name") },
+    { field: "region", headerName: t("Region") },
+  ];
 
   const handleEvent = ({id}) => {    
     navigate(`/lawyers/${id}`);

@@ -6,7 +6,7 @@ function LawyerDetails() {
 
   return (
     <div>
-      details of lawyer {params.lawyerId}
+      ID: {params.lawyerId}
       <button
         onClick={() => {
           navigate(-1);

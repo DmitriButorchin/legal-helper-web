@@ -11,6 +11,27 @@ import LawyersList from './lawyers/lawyers-list';
 import LawyerDetails from './lawyers/lawyer-details';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import i18n from 'i18next';
+import { initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  resources: {
+    ru: {
+      translation: {
+        "First Name": "Имя",
+        Home: "Главная",
+        "Last Name": "Фамилия",
+        Lawyers: "Адвокаты",
+        Region: "Регион",
+      },
+    },
+  },
+  lng: "ru",
+  fallbackLng: "ru",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 const router = createBrowserRouter([
   {
