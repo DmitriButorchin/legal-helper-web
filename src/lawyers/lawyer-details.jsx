@@ -1,19 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { selectLawyerById } from "./lawyersSlice";
+import { useSelector } from "react-redux";
 
 function LawyerDetails() {
-  const navigate = useNavigate();
   const params = useParams();
+  const { t } = useTranslation();
 
+  const lawyer = useSelector((state) =>
+    selectLawyerById(state, +params.lawyerId)
+  );
   return (
     <div>
-      ID: {params.lawyerId}
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Go Back
-      </button>
+      <div>
+        {t("First Name")}: {lawyer.firstName}
+      </div>
+      <div>
+        {t("Last Name")}: {lawyer.lastName}
+      </div>
+      <div>
+        {t("Region")}: {lawyer.region}
+      </div>
     </div>
   );
 }

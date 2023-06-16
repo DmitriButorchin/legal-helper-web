@@ -1,18 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import App from './App';
-import ErrorPage from './error-page';
-import LawyersList from './lawyers/lawyers-list';
-import LawyerDetails from './lawyers/lawyer-details';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import App from "./App";
+import ErrorPage from "./error-page";
+import LawyersList from "./lawyers/lawyers-list";
+import LawyerDetails from "./lawyers/lawyer-details";
+import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import i18n from 'i18next';
+import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import lawyersReducer from "./lawyers/lawyersSlice";
+
+const store = configureStore({
+  reducer: {
+    lawyers: lawyersReducer,
+  },
+});
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -51,10 +60,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

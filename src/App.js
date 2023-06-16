@@ -7,8 +7,14 @@ function App() {
 
   return (
     <div>
-      <Link to="/">{t("Home")}</Link>
-      <Link to="/lawyers">{t("Lawyers")}</Link>
+      <div className="header">
+        <Link to="/" className="link">
+          {t("Home")}
+        </Link>
+        <Link to="/lawyers" className="link">
+          {t("Lawyers")}
+        </Link>
+      </div>
       <Outlet />
     </div>
   );
