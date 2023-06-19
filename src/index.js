@@ -9,17 +9,21 @@ import App from "./App";
 import ErrorPage from "./error-page";
 import LawyersList from "./lawyers/lawyers-list";
 import LawyerDetails from "./lawyers/lawyer-details";
+import RegionsList from "./regions/regions-list";
+import RegionDetails from "./regions/region-details";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import lawyersReducer from "./lawyers/lawyersSlice";
+import lawyersReducer from "./lawyers/lawyers-slice";
+import regionsReducer from "./regions/regions-slice";
 
 const store = configureStore({
   reducer: {
     lawyers: lawyersReducer,
+    regions: regionsReducer,
   },
 });
 
@@ -29,9 +33,13 @@ i18n.use(initReactI18next).init({
       translation: {
         "First Name": "Имя",
         Home: "Главная",
+        ID: "Идентификатор",
         "Last Name": "Фамилия",
-        Lawyers: "Адвокаты",
-        Region: "Регион",
+        Lawyer_one: "Адвокат",
+        Lawyer_few: "Адвокаты",
+        Region_one: "Регион",
+        Region_few: "Регионы",
+        Title: "Название",
       },
     },
   },
@@ -55,6 +63,14 @@ const router = createBrowserRouter([
       {
         path: "lawyers/:lawyerId",
         element: <LawyerDetails />,
+      },
+      {
+        path: "regions",
+        element: <RegionsList />,
+      },
+      {
+        path: "regions/:regionId",
+        element: <RegionDetails />,
       },
     ],
   },

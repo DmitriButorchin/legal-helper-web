@@ -4,7 +4,6 @@ const lawyersSlice = createSlice({
   name: "lawyers",
   initialState: {
     data: {},
-    selectedId: undefined,
   },
   reducers: {
     lawyersReceived(state, action) {
@@ -13,9 +12,6 @@ const lawyersSlice = createSlice({
         return acc;
       }, {});
       state.data = { ...state.data, ...data };
-    },
-    lawyerSelected(state, action) {
-      state.selectedId = action.payload;
     },
   },
 });
@@ -31,5 +27,5 @@ export const selectLawyerById = createSelector(
   (slice, id) => slice.data[id] || {}
 );
 
-export const { lawyersReceived, lawyerSelected } = lawyersSlice.actions;
+export const { lawyersReceived } = lawyersSlice.actions;
 export default lawyersSlice.reducer;

@@ -1,23 +1,26 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { selectLawyers } from "./lawyersSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllLawyers } from "./actions";
-import { useEffect } from "react";
+import { selectLawyers } from "./lawyers-slice";
+import { useSelector } from "react-redux";
+import { selectRegionsTitlesReference } from "../regions/regions-slice";
 
 function LawyersList() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllLawyers());
-  }, [dispatch]);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const regionsReference = useSelector((state) =>
+    selectRegionsTitlesReference(state)
+  );
   const columns = [
+    { field: "id", headerName: t("ID") },
     { field: "firstName", headerName: t("First Name") },
     { field: "lastName", headerName: t("Last Name") },
-    { field: "region", headerName: t("Region") },
+    {
+      field: "regionId",
+      valueGetter: (params) => regionsReference[params.value],
+      headerName: t("Region", { count: 1 }),
+    },
   ];
 
   const handleEvent = ({ id }) => {
