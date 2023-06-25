@@ -31,7 +31,20 @@ export const selectLawyersByRegionSorted = createSelector(
   (lawyers, regionId) =>
     lawyers
       .filter((lawyer) => lawyer.regionId === regionId)
-      .sort((first, second) => second.caseCount - first.caseCount)
+      .sort((first, second) => first.caseCount - second.caseCount)
+);
+export const selectLaziestLawyer = createSelector(
+  [selectLawyersByRegionSorted],
+  (lawyers) => {
+    if (!lawyers.length) {
+      return { id: '' };
+    };
+
+    const minCount = lawyers[0].caseCount;
+    const minLawyers = lawyers.filter(lawyer => lawyer.caseCount === minCount);
+    const randomIndex = Math.floor(Math.random() * minLawyers.length);
+    return minLawyers[randomIndex];
+  }
 );
 export const selectLawyersNamesReference = createSelector(
   [selectLawyers],

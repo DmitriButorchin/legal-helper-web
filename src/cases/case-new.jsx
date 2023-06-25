@@ -1,12 +1,15 @@
 import "./case-new.css";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCase } from "../cases/actions";
 import { selectRegions } from "../regions/regions-slice";
-import { selectLawyersByRegionSorted } from "../lawyers/lawyers-slice";
+import {
+  selectLawyersByRegionSorted,
+  selectLaziestLawyer,
+} from "../lawyers/lawyers-slice";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -18,13 +21,25 @@ function CaseNew() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const [regionId, setRegionId] = useState("");
+  const [lawyerId, setLawyerId] = useState("");
+  const regions = useSelector((state) => selectRegions(state));
+  const lawyers = useSelector((state) =>
+    selectLawyersByRegionSorted(state, regionId)
+  );
+  const laziestLawyer = useSelector((state) =>
+    selectLaziestLawyer(state, regionId)
+  );
+
   function handleRegionChange(e) {
+    setLawyerId('');
     setRegionId(e.target.value);
   }
 
-  const [lawyerId, setLawyerId] = useState("");
+  useEffect(() => {
+    setLawyerId(laziestLawyer.id);
+  }, [laziestLawyer]);
+
   function handleLawyerChange(e) {
     setLawyerId(e.target.value);
   }
@@ -40,8 +55,6 @@ function CaseNew() {
     );
   }
 
-  const regions = useSelector((state) => selectRegions(state));
-  const lawyers = useSelector((state) => selectLawyersByRegionSorted(state, regionId));
   return (
     <form onSubmit={handleSubmit} className="case-new">
       <TextField label={t("Number")} variant="standard" name="number" />
