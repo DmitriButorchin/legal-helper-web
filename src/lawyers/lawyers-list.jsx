@@ -21,6 +21,7 @@ function LawyersList() {
       valueGetter: (params) => regionsReference[params.value],
       headerName: t("Region", { count: 1 }),
     },
+    { field: "caseCount", headerName: t("Case Count") },
   ];
 
   const handleEvent = ({ id }) => {

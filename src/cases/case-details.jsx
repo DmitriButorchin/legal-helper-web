@@ -10,7 +10,7 @@ function CaseDetails() {
   const { t } = useTranslation();
 
   const caseObject = useSelector((state) =>
-    selectCaseById(state, +params.caseId)
+    selectCaseById(state, params.caseId)
   );
   const region = useSelector((state) =>
     selectRegionById(state, caseObject.regionId)

@@ -37,6 +37,7 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         "Add Case": "Добавить Дело",
+        "Case Count": "Кол-во Дел",
         Case_one: "Дело",
         Case_few: "Дела",
         "First Name": "Имя",
@@ -48,6 +49,7 @@ i18n.use(initReactI18next).init({
         Number: "Номер",
         Region_one: "Регион",
         Region_few: "Регионы",
+        Save: "Сохранить",
         SSN: "Идентификатор",
         Title: "Название",
       },

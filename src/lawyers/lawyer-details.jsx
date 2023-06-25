@@ -27,7 +27,10 @@ function LawyerDetails() {
         {t("Last Name")}: {lawyer.lastName}
       </div>
       <div>
-        {t("Region")}: {region.title}
+        {t("Region", { count: 1 })}: {region.title}
+      </div>
+      <div>
+        {t("Case Count")}: {lawyer.caseCount}
       </div>
     </div>
   );

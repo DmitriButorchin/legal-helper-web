@@ -13,6 +13,9 @@ const casesSlice = createSlice({
       }, {});
       state.data = { ...state.data, ...data };
     },
+    caseCreated(state, action) {
+      state.data[action.payload.id] = action.payload;
+    },
   },
 });
 
@@ -27,5 +30,5 @@ export const selectCaseById = createSelector(
   (slice, id) => slice.data[id] || {}
 );
 
-export const { casesReceived } = casesSlice.actions;
+export const { casesReceived, caseCreated } = casesSlice.actions;
 export default casesSlice.reducer;

@@ -1,55 +1,78 @@
 {
-    "cases": [
-        {
-            "id": 1,
-            "number": "1001",
-            "regionId": 1,
-            "lawyerId": 1
-        },
-        {
-            "id": 2,
-            "number": "1002",
-            "regionId": 2,
-            "lawyerId": 3
-        },
-        {
-            "id": 3,
-            "number": "1003",
-            "regionId": 1,
-            "lawyerId": 1
-        }
-    ],
-    "lawyers": [
-        {
-            "id": 1,
-            "ssn": "A100",
-            "firstName": "Алексей",
-            "lastName": "Иванов",
-            "regionId": 1
-        },
-        {
-            "id": 2,
-            "ssn": "B101",
-            "firstName": "Иван",
-            "lastName": "Петров",
-            "regionId": 2
-        },
-        {
-            "id": 3,
-            "ssn": "B105",
-            "firstName": "Елена",
-            "lastName": "Козлова",
-            "regionId": 1
-        }
-    ],
-    "regions": [
-        {
-            "id": 1,
-            "title": "Северный"
-        },
-        {
-            "id": 2,
-            "title": "Южный"
-        }
-    ]
+  "cases": [
+    {
+      "number": "1",
+      "regionId": "1",
+      "lawyerId": "3",
+      "id": "c8ef12d7-1b29-4a44-9116-94c3600aa234"
+    },
+    {
+      "number": "2",
+      "regionId": "1",
+      "lawyerId": "1",
+      "id": "dbdd5ea7-a8e5-4062-a994-6ee3ac93c930"
+    },
+    {
+      "number": "3",
+      "regionId": "1",
+      "lawyerId": "1",
+      "id": "c3c52f0e-1c7e-4d68-8a8a-1eb0ab71cd3a"
+    },
+    {
+      "number": "5",
+      "regionId": "1",
+      "lawyerId": "3",
+      "id": "f47a7bc6-1928-414f-bbda-6ac7f5e233a4"
+    },
+    {
+      "number": "4",
+      "regionId": "1",
+      "lawyerId": "3",
+      "id": "e24605ad-53ae-4fdd-972e-d36bfaf5c58a"
+    }
+  ],
+  "lawyers": [
+    {
+      "id": 1,
+      "ssn": "A100",
+      "firstName": "Алексей",
+      "lastName": "Иванов",
+      "regionId": 1,
+      "caseCount": 2
+    },
+    {
+      "id": 2,
+      "ssn": "B101",
+      "firstName": "Иван",
+      "lastName": "Петров",
+      "regionId": 2,
+      "caseCount": 0
+    },
+    {
+      "id": 3,
+      "ssn": "B105",
+      "firstName": "Елена",
+      "lastName": "Козлова",
+      "regionId": 1,
+      "caseCount": 3
+    }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "title": "Северный"
+    },
+    {
+      "id": 2,
+      "title": "Восточный"
+    },
+    {
+      "id": 3,
+      "title": "Южный"
+    },
+    {
+      "id": 4,
+      "title": "Западный"
+    }
+  ]
 }
