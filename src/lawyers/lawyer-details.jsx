@@ -18,7 +18,7 @@ function LawyerDetails() {
     <div>
       {t("Lawyer", { count: 1 })}
       <div>
-        {t("ID")}: {lawyer.id}
+        {t("SSN")}: {lawyer.ssn}
       </div>
       <div>
         {t("First Name")}: {lawyer.firstName}

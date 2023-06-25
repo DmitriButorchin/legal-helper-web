@@ -1,32 +1,23 @@
 import "./App.css";
-import { Link, Outlet } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { getAllCases } from "./cases/actions";
 import { getAllLawyers } from "./lawyers/actions";
 import { getAllRegions } from "./regions/actions";
+import Header from "./header";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getAllCases());
     dispatch(getAllLawyers());
     dispatch(getAllRegions());
   }, [dispatch]);
-  const { t } = useTranslation();
 
   return (
     <div>
-      <div className="header">
-        <Link to="/" className="link">
-          {t("Home")}
-        </Link>
-        <Link to="/lawyers" className="link">
-          {t("Lawyer", { count: 2 })}
-        </Link>
-        <Link to="/regions" className="link">
-          {t("Region", { count: 2 })}
-        </Link>
-      </div>
+      <Header />
       <Outlet />
     </div>
   );

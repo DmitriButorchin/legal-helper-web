@@ -22,6 +22,14 @@ const selectLawyerId = (_, lawyerId) => lawyerId;
 export const selectLawyers = createSelector([selectLawyersSlice], (slice) =>
   Object.values(slice.data)
 );
+export const selectLawyersNamesReference = createSelector(
+  [selectLawyers],
+  (lawyers) =>
+    lawyers.reduce((acc, lawyer) => {
+      acc[lawyer.id] = `${lawyer.firstName} ${lawyer.lastName}`
+      return acc;
+    }, {})
+);
 export const selectLawyerById = createSelector(
   [selectLawyersSlice, selectLawyerId],
   (slice, id) => slice.data[id] || {}

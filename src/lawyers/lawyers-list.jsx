@@ -13,7 +13,7 @@ function LawyersList() {
     selectRegionsTitlesReference(state)
   );
   const columns = [
-    { field: "id", headerName: t("ID") },
+    { field: "ssn", headerName: t("SSN") },
     { field: "firstName", headerName: t("First Name") },
     { field: "lastName", headerName: t("Last Name") },
     {

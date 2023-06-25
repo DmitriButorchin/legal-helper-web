@@ -1,19 +1,42 @@
 {
+    "cases": [
+        {
+            "id": 1,
+            "number": "1001",
+            "regionId": 1,
+            "lawyerId": 1
+        },
+        {
+            "id": 2,
+            "number": "1002",
+            "regionId": 2,
+            "lawyerId": 3
+        },
+        {
+            "id": 3,
+            "number": "1003",
+            "regionId": 1,
+            "lawyerId": 1
+        }
+    ],
     "lawyers": [
         {
             "id": 1,
+            "ssn": "A100",
             "firstName": "Алексей",
             "lastName": "Иванов",
             "regionId": 1
         },
         {
             "id": 2,
+            "ssn": "B101",
             "firstName": "Иван",
             "lastName": "Петров",
             "regionId": 2
         },
         {
             "id": 3,
+            "ssn": "B105",
             "firstName": "Елена",
             "lastName": "Козлова",
             "regionId": 1
