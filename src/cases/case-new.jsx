@@ -10,6 +10,7 @@ import {
   selectLawyersByRegionSorted,
   selectLaziestLawyer,
 } from "../lawyers/lawyers-slice";
+import { selectAgencies } from "../agencies/agencies-slice";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,6 +24,7 @@ function CaseNew() {
   const dispatch = useDispatch();
   const [regionId, setRegionId] = useState("");
   const [lawyerId, setLawyerId] = useState("");
+  const [agencyId, setAgencyId] = useState("");
   const regions = useSelector((state) => selectRegions(state));
   const lawyers = useSelector((state) =>
     selectLawyersByRegionSorted(state, regionId)
@@ -30,6 +32,7 @@ function CaseNew() {
   const laziestLawyer = useSelector((state) =>
     selectLaziestLawyer(state, regionId)
   );
+  const agencies = useSelector((state) => selectAgencies(state));
 
   function handleRegionChange(e) {
     setLawyerId('');
@@ -42,6 +45,10 @@ function CaseNew() {
 
   function handleLawyerChange(e) {
     setLawyerId(e.target.value);
+  }
+
+  function handleAgencyChange(e) {
+    setAgencyId(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -89,6 +96,24 @@ function CaseNew() {
             return (
               <MenuItem key={lawyer.id} value={lawyer.id}>
                 {lawyer.firstName} {lawyer.lastName} ({lawyer.caseCount})
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+
+      <FormControl variant="standard" sx={{ minWidth: 120 }}>
+        <InputLabel>{t("Agency", { count: 1 })}</InputLabel>
+        <Select
+          name="agencyId"
+          value={agencyId}
+          label={t("Agency", { count: 1 })}
+          onChange={handleAgencyChange}
+        >
+          {agencies.map((agency) => {
+            return (
+              <MenuItem key={agency.id} value={agency.id}>
+                {agency.title}
               </MenuItem>
             );
           })}

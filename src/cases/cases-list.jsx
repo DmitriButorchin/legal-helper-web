@@ -6,6 +6,7 @@ import { selectCases } from "./cases-slice";
 import { useSelector } from "react-redux";
 import { selectRegionsTitlesReference } from "../regions/regions-slice";
 import { selectLawyersNamesReference } from "../lawyers/lawyers-slice";
+import { selectAgenciesTitlesReference } from "../agencies/agencies-slice";
 
 function CasesList() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ function CasesList() {
   const lawyersReference = useSelector((state) =>
     selectLawyersNamesReference(state)
   );
+  const agenciesReference = useSelector((state) =>
+    selectAgenciesTitlesReference(state));
   const columns = [
     { field: "number", headerName: t("Number") },
     {
@@ -28,6 +31,11 @@ function CasesList() {
       field: "lawyerId",
       valueGetter: (params) => lawyersReference[params.value],
       headerName: t("Lawyer", { count: 1 }),
+    },
+    {
+      field: "agencyId",
+      valueGetter: (params) => agenciesReference[params.value],
+      headerName: t("Agency", { count: 1 }),
     },
   ];
 

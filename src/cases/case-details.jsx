@@ -4,6 +4,7 @@ import { selectCaseById } from "./cases-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
 import { selectLawyerById } from "../lawyers/lawyers-slice";
+import { selectAgencyById } from "../agencies/agencies-slice";
 
 function CaseDetails() {
   const params = useParams();
@@ -18,6 +19,9 @@ function CaseDetails() {
   const lawyer = useSelector((state) =>
     selectLawyerById(state, caseObject.lawyerId)
   );
+  const agency = useSelector((state) =>
+    selectAgencyById(state, caseObject.agencyId)
+  );
   return (
     <div>
       {t("Case", { count: 1 })}
@@ -29,6 +33,9 @@ function CaseDetails() {
       </div>
       <div>
         {t("Lawyer", { count: 1 })}: {lawyer.firstName} {lawyer.lastName}
+      </div>
+      <div>
+        {t("Agency", { count: 1 })}: {agency.title}
       </div>
     </div>
   );

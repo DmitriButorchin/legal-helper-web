@@ -17,9 +17,22 @@ const agenciesSlice = createSlice({
 });
 
 const selectAgenciesSlice = (state) => state.agencies;
+const selectAgencyId = (_, agencyId) => agencyId;
 
 export const selectAgencies = createSelector([selectAgenciesSlice], (slice) =>
   Object.values(slice.data)
+);
+export const selectAgenciesTitlesReference = createSelector(
+  [selectAgencies],
+  (agencies) =>
+    agencies.reduce((acc, region) => {
+      acc[region.id] = region.title;
+      return acc;
+    }, {})
+);
+export const selectAgencyById = createSelector(
+  [selectAgenciesSlice, selectAgencyId],
+  (slice, id) => slice.data[id] || {}
 );
 
 export const { agenciesReceived } = agenciesSlice.actions;
