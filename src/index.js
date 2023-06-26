@@ -14,6 +14,7 @@ import LawyersList from "./lawyers/lawyers-list";
 import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
 import RegionDetails from "./regions/region-details";
+import AgenciesList from "./agencies/agencies-list";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import i18n from "i18next";
@@ -23,12 +24,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import casesReducer from "./cases/cases-slice";
 import lawyersReducer from "./lawyers/lawyers-slice";
 import regionsReducer from "./regions/regions-slice";
+import agenciesReducer from "./agencies/agencies-slice";
 
 const store = configureStore({
   reducer: {
     cases: casesReducer,
     lawyers: lawyersReducer,
     regions: regionsReducer,
+    agencies: agenciesReducer,
   },
 });
 
@@ -37,6 +40,8 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         "Add Case": "Добавить Дело",
+        "Agency_one": "Орган",
+        "Agency_few": "Органы",
         "Case Count": "Кол-во Дел",
         Case_one: "Дело",
         Case_few: "Дела",
@@ -95,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: "regions/:regionId",
         element: <RegionDetails />,
+      },
+      {
+        path: "agencies",
+        element: <AgenciesList />,
       },
     ],
   },

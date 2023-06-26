@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getAllCases } from "./cases/actions";
 import { getAllLawyers } from "./lawyers/actions";
 import { getAllRegions } from "./regions/actions";
+import { getAllAgencies } from "./agencies/actions";
 import Header from "./header";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     dispatch(getAllCases());
     dispatch(getAllLawyers());
     dispatch(getAllRegions());
+    dispatch(getAllAgencies());
   }, [dispatch]);
 
   return (
