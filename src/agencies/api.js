@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = {
   getAgencies: async () => {
-    const response = await axios.get("http://localhost:8080/agencies");
+    const response = await axios.get("/agencies");
     return response.data;
   },
 };

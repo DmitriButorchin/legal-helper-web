@@ -25,6 +25,9 @@ import casesReducer from "./cases/cases-slice";
 import lawyersReducer from "./lawyers/lawyers-slice";
 import regionsReducer from "./regions/regions-slice";
 import agenciesReducer from "./agencies/agencies-slice";
+import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const store = configureStore({
   reducer: {
@@ -40,8 +43,8 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         "Add Case": "Добавить Дело",
-        "Agency_one": "Орган",
-        "Agency_few": "Органы",
+        Agency_one: "Орган",
+        Agency_few: "Органы",
         "Case Count": "Кол-во Дел",
         Case_one: "Дело",
         Case_few: "Дела",

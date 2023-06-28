@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = {
   getRegions: async () => {
-    const response = await axios.get("http://localhost:8080/regions");
+    const response = await axios.get("/regions");
     return response.data;
   },
 };
