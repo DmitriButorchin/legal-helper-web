@@ -13,11 +13,12 @@ function LawyersList() {
     selectRegionsTitlesReference(state)
   );
   const columns = [
-    { field: "ssn", headerName: t("SSN") },
-    { field: "firstName", headerName: t("First Name") },
-    { field: "lastName", headerName: t("Last Name") },
+    { field: "ssn", minWidth: 150, headerName: t("SSN") },
+    { field: "firstName", flex: 1, headerName: t("First Name") },
+    { field: "lastName", flex: 1, headerName: t("Last Name") },
     {
       field: "regionId",
+      flex: 2,
       valueGetter: (params) => regionsReference[params.value],
       headerName: t("Region", { count: 1 }),
     },

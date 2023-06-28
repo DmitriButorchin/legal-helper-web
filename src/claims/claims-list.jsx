@@ -23,20 +23,23 @@ function ClaimsList() {
   const columns = [
     { field: "number", headerName: t("Number") },
     {
+      field: "agencyId",
+      flex: 3,
+      valueGetter: (params) => agenciesReference[params.value],
+      headerName: t("Agency", { count: 1 }),
+    },
+    {
       field: "regionId",
+      flex: 3,
       valueGetter: (params) => regionsReference[params.value],
       headerName: t("Region", { count: 1 }),
     },
     {
       field: "lawyerId",
+      flex: 2,
       valueGetter: (params) => lawyersReference[params.value],
       headerName: t("Lawyer", { count: 1 }),
-    },
-    {
-      field: "agencyId",
-      valueGetter: (params) => agenciesReference[params.value],
-      headerName: t("Agency", { count: 1 }),
-    },
+    },    
   ];
 
   const handleEvent = ({ id }) => {

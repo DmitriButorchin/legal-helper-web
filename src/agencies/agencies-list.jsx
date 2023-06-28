@@ -7,8 +7,7 @@ function AgenciesList() {
   const { t } = useTranslation();
 
   const columns = [
-    { field: "id", headerName: t("ID") },
-    { field: "title", headerName: t("Title") },
+    { field: "title", flex: 1, headerName: t("Title") },
   ];
 
   const agencies = useSelector((state) => selectAgencies(state));
