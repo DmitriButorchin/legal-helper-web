@@ -1,32 +1,32 @@
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { selectCaseById } from "./cases-slice";
+import { selectClaimById } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
 import { selectLawyerById } from "../lawyers/lawyers-slice";
 import { selectAgencyById } from "../agencies/agencies-slice";
 
-function CaseDetails() {
+function ClaimDetails() {
   const params = useParams();
   const { t } = useTranslation();
 
-  const caseObject = useSelector((state) =>
-    selectCaseById(state, params.caseId)
+  const claim = useSelector((state) =>
+    selectClaimById(state, params.claimId)
   );
   const region = useSelector((state) =>
-    selectRegionById(state, caseObject.regionId)
+    selectRegionById(state, claim.regionId)
   );
   const lawyer = useSelector((state) =>
-    selectLawyerById(state, caseObject.lawyerId)
+    selectLawyerById(state, claim.lawyerId)
   );
   const agency = useSelector((state) =>
-    selectAgencyById(state, caseObject.agencyId)
+    selectAgencyById(state, claim.agencyId)
   );
   return (
     <div>
-      {t("Case", { count: 1 })}
+      {t("Claim", { count: 1 })}
       <div>
-        {t("Number")}: {caseObject.number}
+        {t("Number")}: {claim.number}
       </div>
       <div>
         {t("Region", { count: 1 })}: {region.title}
@@ -41,4 +41,4 @@ function CaseDetails() {
   );
 }
 
-export default CaseDetails;
+export default ClaimDetails;

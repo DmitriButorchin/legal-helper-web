@@ -1,10 +1,10 @@
-import "./case-new.css";
+import "./claim-new.css";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createCase } from "../cases/actions";
+import { createClaim } from "../claims/actions";
 import { selectRegions } from "../regions/regions-slice";
 import {
   selectLawyersByRegionSorted,
@@ -18,7 +18,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-function CaseNew() {
+function ClaimNew() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -57,13 +57,13 @@ function CaseNew() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    dispatch(createCase(formJson)).then((response) =>
-      navigate(`/cases/${response.id}`)
+    dispatch(createClaim(formJson)).then((response) =>
+      navigate(`/claims/${response.id}`)
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="case-new">
+    <form onSubmit={handleSubmit} className="claim-new">
       <TextField label={t("Number")} variant="standard" name="number" />
 
       <FormControl variant="standard" sx={{ minWidth: 120 }}>
@@ -95,7 +95,7 @@ function CaseNew() {
           {lawyers.map((lawyer) => {
             return (
               <MenuItem key={lawyer.id} value={lawyer.id}>
-                {lawyer.firstName} {lawyer.lastName} ({lawyer.caseCount})
+                {lawyer.firstName} {lawyer.lastName} ({lawyer.claimCount})
               </MenuItem>
             );
           })}
@@ -127,4 +127,4 @@ function CaseNew() {
   );
 }
 
-export default CaseNew;
+export default ClaimNew;

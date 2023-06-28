@@ -13,8 +13,8 @@ const lawyersSlice = createSlice({
       }, {});
       state.data = { ...state.data, ...data };
     },
-    caseAdded(state, action) {
-      state.data[action.payload].caseCount++;
+    claimAdded(state, action) {
+      state.data[action.payload].claimCount++;
     },
   },
 });
@@ -31,7 +31,7 @@ export const selectLawyersByRegionSorted = createSelector(
   (lawyers, regionId) =>
     lawyers
       .filter((lawyer) => lawyer.regionId === regionId)
-      .sort((first, second) => first.caseCount - second.caseCount)
+      .sort((first, second) => first.claimCount - second.claimCount)
 );
 export const selectLaziestLawyer = createSelector(
   [selectLawyersByRegionSorted],
@@ -40,8 +40,8 @@ export const selectLaziestLawyer = createSelector(
       return { id: '' };
     };
 
-    const minCount = lawyers[0].caseCount;
-    const minLawyers = lawyers.filter(lawyer => lawyer.caseCount === minCount);
+    const minCount = lawyers[0].claimCount;
+    const minLawyers = lawyers.filter(lawyer => lawyer.claimCount === minCount);
     const randomIndex = Math.floor(Math.random() * minLawyers.length);
     return minLawyers[randomIndex];
   }
@@ -59,5 +59,5 @@ export const selectLawyerById = createSelector(
   (slice, id) => slice.data[id] || {}
 );
 
-export const { lawyersReceived, caseAdded } = lawyersSlice.actions;
+export const { lawyersReceived, claimAdded } = lawyersSlice.actions;
 export default lawyersSlice.reducer;

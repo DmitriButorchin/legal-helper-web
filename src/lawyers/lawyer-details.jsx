@@ -30,7 +30,7 @@ function LawyerDetails() {
         {t("Region", { count: 1 })}: {region.title}
       </div>
       <div>
-        {t("Case Count")}: {lawyer.caseCount}
+        {t("Claim Count")}: {lawyer.claimCount}
       </div>
     </div>
   );

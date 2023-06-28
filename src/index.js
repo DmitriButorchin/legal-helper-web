@@ -7,9 +7,9 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import App from "./App";
 import ErrorPage from "./error-page";
-import CasesList from "./cases/cases-list";
-import CaseDetails from "./cases/case-details";
-import CaseNew from "./cases/case-new";
+import ClaimsList from "./claims/claims-list";
+import ClaimDetails from "./claims/claim-details";
+import ClaimNew from "./claims/claim-new";
 import LawyersList from "./lawyers/lawyers-list";
 import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
@@ -21,7 +21,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import casesReducer from "./cases/cases-slice";
+import claimsReducer from "./claims/claims-slice";
 import lawyersReducer from "./lawyers/lawyers-slice";
 import regionsReducer from "./regions/regions-slice";
 import agenciesReducer from "./agencies/agencies-slice";
@@ -31,7 +31,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const store = configureStore({
   reducer: {
-    cases: casesReducer,
+    claims: claimsReducer,
     lawyers: lawyersReducer,
     regions: regionsReducer,
     agencies: agenciesReducer,
@@ -42,12 +42,12 @@ i18n.use(initReactI18next).init({
   resources: {
     ru: {
       translation: {
-        "Add Case": "Добавить Дело",
+        "Add a Claim": "Добавить Дело",
         Agency_one: "Орган",
         Agency_few: "Органы",
-        "Case Count": "Кол-во Дел",
-        Case_one: "Дело",
-        Case_few: "Дела",
+        "Claim Count": "Кол-во Дел",
+        Claim_one: "Дело",
+        Claim_few: "Дела",
         "First Name": "Имя",
         Home: "Главная",
         ID: "Идентификатор",
@@ -77,16 +77,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "cases",
-        element: <CasesList />,
+        path: "claims",
+        element: <ClaimsList />,
       },
       {
-        path: "cases/new",
-        element: <CaseNew />,
+        path: "claims/new",
+        element: <ClaimNew />,
       },
       {
-        path: "cases/:caseId",
-        element: <CaseDetails />,
+        path: "claims/:claimId",
+        element: <ClaimDetails />,
       },
       {
         path: "lawyers",

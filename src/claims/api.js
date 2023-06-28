@@ -3,16 +3,16 @@ import { v4 as uuidv4 } from "uuid";
 import lawyerApi from "../lawyers/api";
 
 const api = {
-  getCases: async () => {
-    const response = await axios.get("/cases");
+  getClaims: async () => {
+    const response = await axios.get("/claims");
     return response.data;
   },
-  createCase: async (json) => {
+  createClaim: async (json) => {
     json.id = uuidv4();
-    const response = await axios.post("/cases", json);
+    const response = await axios.post("/claims", json);
     const lawyer = await lawyerApi.getLawyer(json.lawyerId);
     await lawyerApi.updateLawyer(json.lawyerId, {
-      caseCount: lawyer.caseCount + 1,
+      claimCount: lawyer.claimCount + 1,
     });
     return response.data;
   },

@@ -1,5 +1,5 @@
 {
-  "cases": [],
+  "claims": [],
   "lawyers": [
     {
       "id": 1,
@@ -7,7 +7,7 @@
       "firstName": "Алексей",
       "lastName": "Иванов",
       "regionId": 1,
-      "caseCount": 0
+      "claimCount": 0
     },
     {
       "id": 2,
@@ -15,7 +15,7 @@
       "firstName": "Иван",
       "lastName": "Петров",
       "regionId": 1,
-      "caseCount": 0
+      "claimCount": 0
     },
     {
       "id": 3,
@@ -23,7 +23,7 @@
       "firstName": "Елена",
       "lastName": "Козлова",
       "regionId": 2,
-      "caseCount": 0
+      "claimCount": 0
     },
     {
       "id": 4,
@@ -31,7 +31,7 @@
       "firstName": "Игорь",
       "lastName": "Алексеев",
       "regionId": 2,
-      "caseCount": 0
+      "claimCount": 0
     },
     {
       "id": 5,
@@ -39,7 +39,7 @@
       "firstName": "Федор",
       "lastName": "Гром",
       "regionId": 2,
-      "caseCount": 0
+      "claimCount": 0
     }
   ],
   "regions": [

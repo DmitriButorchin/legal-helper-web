@@ -10,8 +10,8 @@ function Header() {
       <Link to="/" className="link">
         {t("Home")}
       </Link>
-      <Link to="/cases" className="link">
-        {t("Case", { count: 2 })}
+      <Link to="/claims" className="link">
+        {t("Claim", { count: 2 })}
       </Link>
       <Link to="/lawyers" className="link">
         {t("Lawyer", { count: 2 })}

@@ -1,14 +1,14 @@
-import "./cases-list.css";
+import "./claims-list.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { selectCases } from "./cases-slice";
+import { selectClaims } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionsTitlesReference } from "../regions/regions-slice";
 import { selectLawyersNamesReference } from "../lawyers/lawyers-slice";
 import { selectAgenciesTitlesReference } from "../agencies/agencies-slice";
 
-function CasesList() {
+function ClaimsList() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -40,18 +40,18 @@ function CasesList() {
   ];
 
   const handleEvent = ({ id }) => {
-    navigate(`/cases/${id}`);
+    navigate(`/claims/${id}`);
   };
 
-  const cases = useSelector((state) => selectCases(state));
+  const claims = useSelector((state) => selectClaims(state));
   return (
-    <div className="cases-list">
-      <Link to="/cases/new" className="link">
-        {t("Add Case")}
+    <div className="claims-list">
+      <Link to="/claims/new" className="link">
+        {t("Add a Claim")}
       </Link>
-      <DataGrid rows={cases} columns={columns} onRowClick={handleEvent} />
+      <DataGrid rows={claims} columns={columns} onRowClick={handleEvent} />
     </div>
   );
 }
 
-export default CasesList;
+export default ClaimsList;
