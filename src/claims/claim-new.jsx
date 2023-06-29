@@ -16,12 +16,14 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 
 function ClaimNew() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
   const [regionId, setRegionId] = useState("");
   const [lawyerId, setLawyerId] = useState("");
   const [agencyId, setAgencyId] = useState("");
@@ -35,7 +37,7 @@ function ClaimNew() {
   const agencies = useSelector((state) => selectAgencies(state));
 
   function handleRegionChange(e) {
-    setLawyerId('');
+    setLawyerId("");
     setRegionId(e.target.value);
   }
 
@@ -57,16 +59,33 @@ function ClaimNew() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    dispatch(createClaim(formJson)).then((response) =>
-      navigate(`/claims/${response.id}`)
-    );
+    dispatch(createClaim(formJson)).then((response) => {
+      if (response.errors) {
+        console.log(response.errors);
+        setErrors(response.errors);
+      } else {
+        navigate(`/claims/${response.number}`);
+      }
+    });
   }
 
   return (
     <form onSubmit={handleSubmit} className="claim-new">
-      <TextField label={t("Number")} variant="standard" name="number" />
+      <TextField
+        required
+        label={t("Number")}
+        variant="standard"
+        name="number"
+        error={!!errors.number}
+        helperText={errors.number}
+      />
 
-      <FormControl variant="standard" sx={{ minWidth: 120 }}>
+      <FormControl
+        required
+        variant="standard"
+        sx={{ minWidth: 120 }}
+        error={!!errors.regionId}
+      >
         <InputLabel>{t("Region", { count: 1 })}</InputLabel>
         <Select
           name="regionId"
@@ -82,9 +101,15 @@ function ClaimNew() {
             );
           })}
         </Select>
+        <FormHelperText>{errors.regionId}</FormHelperText>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ minWidth: 120 }}>
+      <FormControl
+        required
+        variant="standard"
+        sx={{ minWidth: 120 }}
+        error={!!errors.lawyerId}
+      >
         <InputLabel>{t("Lawyer", { count: 1 })}</InputLabel>
         <Select
           name="lawyerId"
@@ -100,9 +125,15 @@ function ClaimNew() {
             );
           })}
         </Select>
+        <FormHelperText>{errors.lawyerId}</FormHelperText>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ minWidth: 120 }}>
+      <FormControl
+        required
+        variant="standard"
+        sx={{ minWidth: 120 }}
+        error={!!errors.agencyId}
+      >
         <InputLabel>{t("Agency", { count: 1 })}</InputLabel>
         <Select
           name="agencyId"
@@ -118,6 +149,7 @@ function ClaimNew() {
             );
           })}
         </Select>
+        <FormHelperText>{errors.agencyId}</FormHelperText>
       </FormControl>
 
       <Button variant="outlined" type="submit">

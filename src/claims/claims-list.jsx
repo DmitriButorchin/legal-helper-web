@@ -19,7 +19,8 @@ function ClaimsList() {
     selectLawyersNamesReference(state)
   );
   const agenciesReference = useSelector((state) =>
-    selectAgenciesTitlesReference(state));
+    selectAgenciesTitlesReference(state)
+  );
   const columns = [
     { field: "number", headerName: t("Number") },
     {
@@ -39,7 +40,7 @@ function ClaimsList() {
       flex: 2,
       valueGetter: (params) => lawyersReference[params.value],
       headerName: t("Lawyer", { count: 1 }),
-    },    
+    },
   ];
 
   const handleEvent = ({ id }) => {
@@ -52,7 +53,12 @@ function ClaimsList() {
       <Link to="/claims/new" className="link">
         {t("Add a Claim")}
       </Link>
-      <DataGrid rows={claims} columns={columns} onRowClick={handleEvent} />
+      <DataGrid
+        rows={claims}
+        columns={columns}
+        onRowClick={handleEvent}
+        getRowId={(row) => row.number}
+      />
     </div>
   );
 }

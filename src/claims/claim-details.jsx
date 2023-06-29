@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { selectClaimById } from "./claims-slice";
+import { selectClaimByNumber } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
 import { selectLawyerById } from "../lawyers/lawyers-slice";
@@ -11,7 +11,7 @@ function ClaimDetails() {
   const { t } = useTranslation();
 
   const claim = useSelector((state) =>
-    selectClaimById(state, params.claimId)
+    selectClaimByNumber(state, params.claimNumber)
   );
   const region = useSelector((state) =>
     selectRegionById(state, claim.regionId)

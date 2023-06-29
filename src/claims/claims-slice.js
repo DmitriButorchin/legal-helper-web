@@ -8,26 +8,26 @@ const claimsSlice = createSlice({
   reducers: {
     claimsReceived(state, action) {
       const data = action.payload.reduce((acc, item) => {
-        acc[item.id] = item;
+        acc[item.number] = item;
         return acc;
       }, {});
       state.data = { ...state.data, ...data };
     },
     claimCreated(state, action) {
-      state.data[action.payload.id] = action.payload;
+      state.data[action.payload.number] = action.payload;
     },
   },
 });
 
 const selectClaimsSlice = (state) => state.claims;
-const selectClaimId = (_, claimId) => claimId;
+const selectClaimNumber = (_, claimNumber) => claimNumber;
 
 export const selectClaims = createSelector([selectClaimsSlice], (slice) =>
   Object.values(slice.data)
 );
-export const selectClaimById = createSelector(
-  [selectClaimsSlice, selectClaimId],
-  (slice, id) => slice.data[id] || {}
+export const selectClaimByNumber = createSelector(
+  [selectClaimsSlice, selectClaimNumber],
+  (slice, number) => slice.data[number] || {}
 );
 
 export const { claimsReceived, claimCreated } = claimsSlice.actions;

@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         element: <ClaimNew />,
       },
       {
-        path: "claims/:claimId",
+        path: "claims/:claimNumber",
         element: <ClaimDetails />,
       },
       {
