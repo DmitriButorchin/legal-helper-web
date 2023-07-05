@@ -26,10 +26,11 @@ function ClaimNew() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
-  const [arrivalDate, setArrivalDate] = useState(dayjs());
+  const [creationDate, setCreationDate] = useState(dayjs());
   const [regionId, setRegionId] = useState("");
   const [lawyerId, setLawyerId] = useState("");
   const [correspondentId, setCorrespondentId] = useState("");
+  const [deadline, setDeadline] = useState(dayjs());
   const regions = useSelector((state) => selectRegions(state));
   const lawyers = useSelector((state) =>
     selectLawyersByRegionSorted(state, regionId)
@@ -39,8 +40,8 @@ function ClaimNew() {
   );
   const correspondents = useSelector((state) => selectCorrespondents(state));
 
-  function handleArrivalDateChange(e) {
-    setArrivalDate(e);
+  function handleCreationDateChange(e) {
+    setCreationDate(e);
   }
 
   function handleRegionChange(e) {
@@ -60,18 +61,23 @@ function ClaimNew() {
     setCorrespondentId(e.target.value);
   }
 
+  function handleDeadlineChange(e) {
+    setDeadline(e);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    formJson.arrivalDate = arrivalDate?.format("YYYY-MM-DD") || '';
+    formJson.creationDate = creationDate?.format("YYYY-MM-DD") || "";
+    formJson.deadline = deadline?.format("YYYY-MM-DD") || "";
     dispatch(createClaim(formJson)).then((response) => {
       if (response.errors) {
         setErrors(response.errors);
       } else {
-        navigate(`/claims/${response.registrationNumber}`);
+        navigate(`/claims/${encodeURIComponent(response.registrationNumber)}`);
       }
     });
   }
@@ -80,11 +86,70 @@ function ClaimNew() {
     <form onSubmit={handleSubmit} className="claim-new">
       <TextField
         required
-        label={t("Number")}
+        label={t("Registration Number")}
         variant="standard"
         name="registrationNumber"
         error={!!errors.registrationNumber}
         helperText={errors.registrationNumber}
+      />
+
+      <FormControl
+        required
+        variant="standard"
+        sx={{ minWidth: 120 }}
+        error={!!errors.correspondentId}
+      >
+        <InputLabel>{t("Correspondent", { count: 1 })}</InputLabel>
+        <Select
+          name="correspondentId"
+          value={correspondentId}
+          label={t("Correspondent", { count: 1 })}
+          onChange={handleCorrespondentChange}
+        >
+          {correspondents.map((correspondent) => {
+            return (
+              <MenuItem key={correspondent.id} value={correspondent.id}>
+                {correspondent.title}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <FormHelperText>{errors.correspondentId}</FormHelperText>
+      </FormControl>
+
+      {/* TODO: add validation*/}
+      <DatePicker
+        label={t("Creation Date")}
+        value={creationDate}
+        onChange={handleCreationDateChange}
+        format="DD/MM/YYYY"
+      />
+
+      <TextField
+        required
+        label={t("Creation Number")}
+        variant="standard"
+        name="creationNumber"
+        error={!!errors.creationNumber}
+        helperText={errors.creationNumber}
+      />
+
+      <TextField
+        required
+        label={t("Summary")}
+        variant="standard"
+        name="summary"
+        error={!!errors.summary}
+        helperText={errors.summary}
+      />
+
+      <TextField
+        required
+        label={t("Responsible")}
+        variant="standard"
+        name="responsible"
+        error={!!errors.responsible}
+        helperText={errors.responsible}
       />
 
       <FormControl
@@ -111,14 +176,6 @@ function ClaimNew() {
         <FormHelperText>{errors.regionId}</FormHelperText>
       </FormControl>
 
-      {/* TODO: add validation*/}
-      <DatePicker
-        label={t("Arrival Date")}
-        value={arrivalDate}
-        onChange={handleArrivalDateChange}
-        format="DD/MM/YYYY"
-      />
-
       <FormControl
         required
         variant="standard"
@@ -143,29 +200,22 @@ function ClaimNew() {
         <FormHelperText>{errors.lawyerId}</FormHelperText>
       </FormControl>
 
-      <FormControl
+      <TextField
         required
+        label={t("Defendant")}
         variant="standard"
-        sx={{ minWidth: 120 }}
-        error={!!errors.correspondentId}
-      >
-        <InputLabel>{t("Correspondent", { count: 1 })}</InputLabel>
-        <Select
-          name="correspondentId"
-          value={correspondentId}
-          label={t("Correspondent", { count: 1 })}
-          onChange={handleCorrespondentChange}
-        >
-          {correspondents.map((correspondent) => {
-            return (
-              <MenuItem key={correspondent.id} value={correspondent.id}>
-                {correspondent.title}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <FormHelperText>{errors.correspondentId}</FormHelperText>
-      </FormControl>
+        name="defendant"
+        error={!!errors.defendant}
+        helperText={errors.defendant}
+      />
+
+      {/* TODO: add validation*/}
+      <DatePicker
+        label={t("Deadline")}
+        value={deadline}
+        onChange={handleDeadlineChange}
+        format="DD/MM/YYYY"
+      />
 
       <Button variant="outlined" type="submit">
         {t("Save")}

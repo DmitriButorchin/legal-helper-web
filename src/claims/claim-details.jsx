@@ -26,7 +26,7 @@ function ClaimDetails() {
     <div>
       {t("Claim", { count: 1 })}
       <div>
-        {t("Number")}: {claim.registrationNumber}
+        {t("Registration Number")}: {claim.registrationNumber}
       </div>
       <div>
         {t("Region", { count: 1 })}: {region.title}

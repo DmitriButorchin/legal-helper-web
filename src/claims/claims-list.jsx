@@ -22,7 +22,7 @@ function ClaimsList() {
     selectCorrespondentsTitlesReference(state)
   );
   const columns = [
-    { field: "registrationNumber", headerName: t("Number") },
+    { field: "registrationNumber", headerName: t("Registration Number") },
     {
       field: "correspondentId",
       flex: 3,
@@ -44,7 +44,7 @@ function ClaimsList() {
   ];
 
   const handleEvent = ({ id }) => {
-    navigate(`/claims/${id}`);
+    navigate(`/claims/${encodeURIComponent(id)}`);
   };
 
   const claims = useSelector((state) => selectClaims(state));
