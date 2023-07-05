@@ -6,7 +6,7 @@ import { selectClaims } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionsTitlesReference } from "../regions/regions-slice";
 import { selectLawyersNamesReference } from "../lawyers/lawyers-slice";
-import { selectAgenciesTitlesReference } from "../agencies/agencies-slice";
+import { selectCorrespondentsTitlesReference } from "../correspondents/correspondents-slice";
 
 function ClaimsList() {
   const navigate = useNavigate();
@@ -18,16 +18,16 @@ function ClaimsList() {
   const lawyersReference = useSelector((state) =>
     selectLawyersNamesReference(state)
   );
-  const agenciesReference = useSelector((state) =>
-    selectAgenciesTitlesReference(state)
+  const correspondentsReference = useSelector((state) =>
+    selectCorrespondentsTitlesReference(state)
   );
   const columns = [
-    { field: "number", headerName: t("Number") },
+    { field: "registrationNumber", headerName: t("Number") },
     {
-      field: "agencyId",
+      field: "correspondentId",
       flex: 3,
-      valueGetter: (params) => agenciesReference[params.value],
-      headerName: t("Agency", { count: 1 }),
+      valueGetter: (params) => correspondentsReference[params.value],
+      headerName: t("Correspondent", { count: 1 }),
     },
     {
       field: "regionId",
@@ -57,7 +57,7 @@ function ClaimsList() {
         rows={claims}
         columns={columns}
         onRowClick={handleEvent}
-        getRowId={(row) => row.number}
+        getRowId={(row) => row.registrationNumber}
       />
     </div>
   );

@@ -8,13 +8,13 @@ const claimsSlice = createSlice({
   reducers: {
     claimsReceived(state, action) {
       const data = action.payload.reduce((acc, item) => {
-        acc[item.number] = item;
+        acc[item.registrationNumber] = item;
         return acc;
       }, {});
       state.data = { ...state.data, ...data };
     },
     claimCreated(state, action) {
-      state.data[action.payload.number] = action.payload;
+      state.data[action.payload.registrationNumber] = action.payload;
     },
   },
 });

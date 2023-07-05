@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = {
-  getAgencies: async () => {
-    const response = await axios.get("/agencies");
+  getCorrespondents: async () => {
+    const response = await axios.get("/correspondents");
     return response.data;
   },
 };

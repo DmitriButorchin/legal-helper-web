@@ -4,7 +4,7 @@ import { selectClaimByNumber } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
 import { selectLawyerById } from "../lawyers/lawyers-slice";
-import { selectAgencyById } from "../agencies/agencies-slice";
+import { selectCorrespondentById } from "../correspondents/correspondents-slice";
 
 function ClaimDetails() {
   const params = useParams();
@@ -19,14 +19,14 @@ function ClaimDetails() {
   const lawyer = useSelector((state) =>
     selectLawyerById(state, claim.lawyerId)
   );
-  const agency = useSelector((state) =>
-    selectAgencyById(state, claim.agencyId)
+  const correspondent = useSelector((state) =>
+    selectCorrespondentById(state, claim.correspondentId)
   );
   return (
     <div>
       {t("Claim", { count: 1 })}
       <div>
-        {t("Number")}: {claim.number}
+        {t("Number")}: {claim.registrationNumber}
       </div>
       <div>
         {t("Region", { count: 1 })}: {region.title}
@@ -35,7 +35,7 @@ function ClaimDetails() {
         {t("Lawyer", { count: 1 })}: {lawyer.firstName} {lawyer.lastName}
       </div>
       <div>
-        {t("Agency", { count: 1 })}: {agency.title}
+        {t("Correspondent", { count: 1 })}: {correspondent.title}
       </div>
     </div>
   );

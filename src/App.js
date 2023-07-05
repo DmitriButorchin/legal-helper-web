@@ -5,13 +5,15 @@ import { useEffect } from "react";
 import { getAllClaims } from "./claims/actions";
 import { getAllLawyers } from "./lawyers/actions";
 import { getAllRegions } from "./regions/actions";
-import { getAllAgencies } from "./agencies/actions";
+import { getAllCorrespondents } from "./correspondents/actions";
 import Header from "./header";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllAgencies());
+    dispatch(getAllCorrespondents());
     dispatch(getAllRegions());
     dispatch(getAllLawyers());
     dispatch(getAllClaims());
@@ -19,8 +21,10 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <Outlet />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Header />
+        <Outlet />
+      </LocalizationProvider>
     </div>
   );
 }

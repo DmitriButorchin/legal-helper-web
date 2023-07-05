@@ -19,8 +19,8 @@ function Header() {
       <Link to="/regions" className="link">
         {t("Region", { count: 2 })}
       </Link>
-      <Link to="/agencies" className="link">
-        {t("Agency", { count: 2 })}
+      <Link to="/correspondents" className="link">
+        {t("Correspondent", { count: 2 })}
       </Link>
     </div>
   );

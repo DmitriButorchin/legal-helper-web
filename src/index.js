@@ -14,7 +14,7 @@ import LawyersList from "./lawyers/lawyers-list";
 import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
 import RegionDetails from "./regions/region-details";
-import AgenciesList from "./agencies/agencies-list";
+import CorrespondentsList from "./correspondents/correspondents-list";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import i18n from "i18next";
@@ -24,7 +24,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import claimsReducer from "./claims/claims-slice";
 import lawyersReducer from "./lawyers/lawyers-slice";
 import regionsReducer from "./regions/regions-slice";
-import agenciesReducer from "./agencies/agencies-slice";
+import correspondentsReducer from "./correspondents/correspondents-slice";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -34,7 +34,7 @@ const store = configureStore({
     claims: claimsReducer,
     lawyers: lawyersReducer,
     regions: regionsReducer,
-    agencies: agenciesReducer,
+    correspondents: correspondentsReducer,
   },
 });
 
@@ -43,8 +43,9 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         "Add a Claim": "Добавить Дело",
-        Agency_one: "Орган",
-        Agency_few: "Органы",
+        Correspondent_one: "Корреспондент",
+        Correspondent_few: "Корреспонденты",
+        "Arrival Date": "Дата Поступления",
         "Claim Count": "Кол-во Дел",
         Claim_one: "Дело",
         Claim_few: "Дела",
@@ -105,8 +106,8 @@ const router = createBrowserRouter([
         element: <RegionDetails />,
       },
       {
-        path: "agencies",
-        element: <AgenciesList />,
+        path: "correspondents",
+        element: <CorrespondentsList />,
       },
     ],
   },

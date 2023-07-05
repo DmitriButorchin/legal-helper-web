@@ -10,7 +10,9 @@ import {
   selectLawyersByRegionSorted,
   selectLaziestLawyer,
 } from "../lawyers/lawyers-slice";
-import { selectAgencies } from "../agencies/agencies-slice";
+import { selectCorrespondents } from "../correspondents/correspondents-slice";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,9 +26,10 @@ function ClaimNew() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
+  const [arrivalDate, setArrivalDate] = useState(dayjs());
   const [regionId, setRegionId] = useState("");
   const [lawyerId, setLawyerId] = useState("");
-  const [agencyId, setAgencyId] = useState("");
+  const [correspondentId, setCorrespondentId] = useState("");
   const regions = useSelector((state) => selectRegions(state));
   const lawyers = useSelector((state) =>
     selectLawyersByRegionSorted(state, regionId)
@@ -34,7 +37,11 @@ function ClaimNew() {
   const laziestLawyer = useSelector((state) =>
     selectLaziestLawyer(state, regionId)
   );
-  const agencies = useSelector((state) => selectAgencies(state));
+  const correspondents = useSelector((state) => selectCorrespondents(state));
+
+  function handleArrivalDateChange(e) {
+    setArrivalDate(e);
+  }
 
   function handleRegionChange(e) {
     setLawyerId("");
@@ -49,8 +56,8 @@ function ClaimNew() {
     setLawyerId(e.target.value);
   }
 
-  function handleAgencyChange(e) {
-    setAgencyId(e.target.value);
+  function handleCorrespondentChange(e) {
+    setCorrespondentId(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -59,12 +66,12 @@ function ClaimNew() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
+    formJson.arrivalDate = arrivalDate?.format("YYYY-MM-DD") || '';
     dispatch(createClaim(formJson)).then((response) => {
       if (response.errors) {
-        console.log(response.errors);
         setErrors(response.errors);
       } else {
-        navigate(`/claims/${response.number}`);
+        navigate(`/claims/${response.registrationNumber}`);
       }
     });
   }
@@ -75,9 +82,9 @@ function ClaimNew() {
         required
         label={t("Number")}
         variant="standard"
-        name="number"
-        error={!!errors.number}
-        helperText={errors.number}
+        name="registrationNumber"
+        error={!!errors.registrationNumber}
+        helperText={errors.registrationNumber}
       />
 
       <FormControl
@@ -103,6 +110,14 @@ function ClaimNew() {
         </Select>
         <FormHelperText>{errors.regionId}</FormHelperText>
       </FormControl>
+
+      {/* TODO: add validation*/}
+      <DatePicker
+        label={t("Arrival Date")}
+        value={arrivalDate}
+        onChange={handleArrivalDateChange}
+        format="DD/MM/YYYY"
+      />
 
       <FormControl
         required
@@ -132,24 +147,24 @@ function ClaimNew() {
         required
         variant="standard"
         sx={{ minWidth: 120 }}
-        error={!!errors.agencyId}
+        error={!!errors.correspondentId}
       >
-        <InputLabel>{t("Agency", { count: 1 })}</InputLabel>
+        <InputLabel>{t("Correspondent", { count: 1 })}</InputLabel>
         <Select
-          name="agencyId"
-          value={agencyId}
-          label={t("Agency", { count: 1 })}
-          onChange={handleAgencyChange}
+          name="correspondentId"
+          value={correspondentId}
+          label={t("Correspondent", { count: 1 })}
+          onChange={handleCorrespondentChange}
         >
-          {agencies.map((agency) => {
+          {correspondents.map((correspondent) => {
             return (
-              <MenuItem key={agency.id} value={agency.id}>
-                {agency.title}
+              <MenuItem key={correspondent.id} value={correspondent.id}>
+                {correspondent.title}
               </MenuItem>
             );
           })}
         </Select>
-        <FormHelperText>{errors.agencyId}</FormHelperText>
+        <FormHelperText>{errors.correspondentId}</FormHelperText>
       </FormControl>
 
       <Button variant="outlined" type="submit">
