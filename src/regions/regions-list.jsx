@@ -1,5 +1,6 @@
+import "./regions-list.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { selectRegions } from "./regions-slice";
 import { useSelector } from "react-redux";
@@ -18,7 +19,10 @@ function RegionsList() {
 
   const regions = useSelector((state) => selectRegions(state));
   return (
-    <div>
+    <div className="regions-list">
+      <Link to="/regions/new" className="link">
+        {t("Add a Region")}
+      </Link>
       {<DataGrid rows={regions} columns={columns} onRowClick={handleEvent} />}
     </div>
   );

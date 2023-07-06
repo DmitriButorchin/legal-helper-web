@@ -9,7 +9,7 @@ function LawyerDetails() {
   const { t } = useTranslation();
 
   const lawyer = useSelector((state) =>
-    selectLawyerById(state, +params.lawyerId)
+    selectLawyerById(state, params.lawyerId)
   );
   const region = useSelector((state) =>
     selectRegionById(state, lawyer.regionId)

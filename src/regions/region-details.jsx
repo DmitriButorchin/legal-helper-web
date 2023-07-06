@@ -8,14 +8,11 @@ function RegionDetails() {
   const { t } = useTranslation();
 
   const region = useSelector((state) =>
-    selectRegionById(state, +params.regionId)
+    selectRegionById(state, params.regionId)
   );
   return (
     <div>
       {t("Region", { count: 1 })}
-      <div>
-        {t("ID")}: {region.id}
-      </div>
       <div>
         {t("Title")}: {region.title}
       </div>

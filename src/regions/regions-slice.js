@@ -13,6 +13,9 @@ const regionsSlice = createSlice({
       }, {});
       state.data = { ...state.data, ...data };
     },
+    regionCreated(state, action) {
+      state.data[action.payload.id] = action.payload;
+    },
   },
 });
 
@@ -35,5 +38,5 @@ export const selectRegionById = createSelector(
   (slice, id) => slice.data[id] || {}
 );
 
-export const { regionsReceived } = regionsSlice.actions;
+export const { regionsReceived, regionCreated } = regionsSlice.actions;
 export default regionsSlice.reducer;

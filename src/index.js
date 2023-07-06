@@ -13,6 +13,7 @@ import ClaimNew from "./claims/claim-new";
 import LawyersList from "./lawyers/lawyers-list";
 import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
+import RegionNew from "./regions/region-new";
 import RegionDetails from "./regions/region-details";
 import CorrespondentsList from "./correspondents/correspondents-list";
 import CorrespondentNew from "./correspondents/correspondent-new";
@@ -46,6 +47,7 @@ i18n.use(initReactI18next).init({
       translation: {
         "Add a Claim": "Добавить Дело",
         "Add a Correspondent": "Добавить Корреспондента",
+        "Add a Region": "Добавить Регион",
         Correspondent_one: "Корреспондент",
         Correspondent_few: "Корреспонденты",
         "Creation Date": "Дата Документа",
@@ -58,7 +60,6 @@ i18n.use(initReactI18next).init({
         Defendant: "Подсудимый",
         "First Name": "Имя",
         Home: "Главная",
-        ID: "Идентификатор",
         "Last Name": "Фамилия",
         Lawyer_one: "Адвокат",
         Lawyer_few: "Адвокаты",
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: "regions",
         element: <RegionsList />,
+      },
+      {
+        path: "/regions/new",
+        element: <RegionNew />,
       },
       {
         path: "regions/:regionId",
