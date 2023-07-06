@@ -26,7 +26,7 @@ function LawyersList() {
   ];
 
   const handleEvent = ({ id }) => {
-    navigate(`/lawyers/${id}`);
+    navigate(`/lawyers/${encodeURIComponent(id)}`);
   };
 
   const lawyers = useSelector((state) => selectLawyers(state));

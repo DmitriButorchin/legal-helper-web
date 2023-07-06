@@ -13,7 +13,7 @@ function RegionsList() {
   ];
 
   const handleEvent = ({ id }) => {
-    navigate(`/regions/${id}`);
+    navigate(`/regions/${encodeURIComponent(id)}`);
   };
 
   const regions = useSelector((state) => selectRegions(state));

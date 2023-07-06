@@ -13,6 +13,9 @@ const correspondentsSlice = createSlice({
       }, {});
       state.data = { ...state.data, ...data };
     },
+    correspondentCreated(state, action) {
+      state.data[action.payload.id] = action.payload;
+    },
   },
 });
 
@@ -35,5 +38,5 @@ export const selectCorrespondentById = createSelector(
   (slice, id) => slice.data[id] || {}
 );
 
-export const { correspondentsReceived } = correspondentsSlice.actions;
+export const { correspondentsReceived, correspondentCreated } = correspondentsSlice.actions;
 export default correspondentsSlice.reducer;

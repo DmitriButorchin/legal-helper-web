@@ -15,6 +15,8 @@ import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
 import RegionDetails from "./regions/region-details";
 import CorrespondentsList from "./correspondents/correspondents-list";
+import CorrespondentNew from "./correspondents/correspondent-new";
+import CorrespondentDetails from "./correspondents/correspondent-details";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import i18n from "i18next";
@@ -43,6 +45,7 @@ i18n.use(initReactI18next).init({
     ru: {
       translation: {
         "Add a Claim": "Добавить Дело",
+        "Add a Correspondent": "Добавить Корреспондента",
         Correspondent_one: "Корреспондент",
         Correspondent_few: "Корреспонденты",
         "Creation Date": "Дата Документа",
@@ -114,6 +117,14 @@ const router = createBrowserRouter([
       {
         path: "correspondents",
         element: <CorrespondentsList />,
+      },
+      {
+        path: "/correspondents/new",
+        element: <CorrespondentNew />,
+      },
+      {
+        path: "/correspondents/:correspondentId",
+        element: <CorrespondentDetails />,
       },
     ],
   },
