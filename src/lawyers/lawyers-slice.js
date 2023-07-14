@@ -8,7 +8,7 @@ const lawyersSlice = createSlice({
   reducers: {
     lawyersReceived(state, action) {
       const data = action.payload.reduce((acc, item) => {
-        acc[item.id] = item;
+        acc[item.ssn] = item;
         return acc;
       }, {});
       state.data = { ...state.data, ...data };
@@ -16,11 +16,14 @@ const lawyersSlice = createSlice({
     claimAdded(state, action) {
       state.data[action.payload].claimCount++;
     },
+    lawyerCreated(state, action) {
+      state.data[action.payload.ssn] = action.payload;
+    },
   },
 });
 
 const selectLawyersSlice = (state) => state.lawyers;
-const selectLawyerId = (_, lawyerId) => lawyerId;
+const selectLawyerSsn = (_, ssn) => ssn;
 const selectRegionId = (_, regionId) => regionId;
 
 export const selectLawyers = createSelector([selectLawyersSlice], (slice) =>
@@ -37,7 +40,7 @@ export const selectLaziestLawyer = createSelector(
   [selectLawyersByRegionSorted],
   (lawyers) => {
     if (!lawyers.length) {
-      return { id: '' };
+      return { ssn: '' };
     };
 
     const minCount = lawyers[0].claimCount;
@@ -50,14 +53,14 @@ export const selectLawyersNamesReference = createSelector(
   [selectLawyers],
   (lawyers) =>
     lawyers.reduce((acc, lawyer) => {
-      acc[lawyer.id] = `${lawyer.firstName} ${lawyer.lastName}`;
+      acc[lawyer.ssn] = `${lawyer.firstName} ${lawyer.lastName}`;
       return acc;
     }, {})
 );
-export const selectLawyerById = createSelector(
-  [selectLawyersSlice, selectLawyerId],
-  (slice, id) => slice.data[id] || {}
+export const selectLawyerBySsn = createSelector(
+  [selectLawyersSlice, selectLawyerSsn],
+  (slice, ssn) => slice.data[ssn] || {}
 );
 
-export const { lawyersReceived, claimAdded } = lawyersSlice.actions;
+export const { lawyersReceived, claimAdded, lawyerCreated } = lawyersSlice.actions;
 export default lawyersSlice.reducer;

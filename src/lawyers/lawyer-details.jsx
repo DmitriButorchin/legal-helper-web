@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { selectLawyerById } from "./lawyers-slice";
+import { selectLawyerBySsn } from "./lawyers-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
 
@@ -9,7 +9,7 @@ function LawyerDetails() {
   const { t } = useTranslation();
 
   const lawyer = useSelector((state) =>
-    selectLawyerById(state, params.lawyerId)
+    selectLawyerBySsn(state, params.lawyerSsn)
   );
   const region = useSelector((state) =>
     selectRegionById(state, lawyer.regionId)

@@ -11,6 +11,7 @@ import ClaimsList from "./claims/claims-list";
 import ClaimDetails from "./claims/claim-details";
 import ClaimNew from "./claims/claim-new";
 import LawyersList from "./lawyers/lawyers-list";
+import LawyerNew from "./lawyers/lawyer-new";
 import LawyerDetails from "./lawyers/lawyer-details";
 import RegionsList from "./regions/regions-list";
 import RegionNew from "./regions/region-new";
@@ -47,6 +48,7 @@ i18n.use(initReactI18next).init({
       translation: {
         "Add a Claim": "Добавить Дело",
         "Add a Correspondent": "Добавить Корреспондента",
+        "Add a Lawyer": "Добавить Адвоката",
         "Add a Region": "Добавить Регион",
         Correspondent_one: "Корреспондент",
         Correspondent_few: "Корреспонденты",
@@ -71,6 +73,8 @@ i18n.use(initReactI18next).init({
         Save: "Сохранить",
         Summary: "Краткое Содержание Документа",
         Title: "Название",
+        "Claim with specified registration number already exists": "Дело с данным номером уже существует",
+        "must not be blank": "Обязательно для заполнения"
       },
     },
   },
@@ -104,7 +108,11 @@ const router = createBrowserRouter([
         element: <LawyersList />,
       },
       {
-        path: "lawyers/:lawyerId",
+        path: "lawyers/new",
+        element: <LawyerNew />,
+      },
+      {
+        path: "lawyers/:lawyerSsn",
         element: <LawyerDetails />,
       },
       {

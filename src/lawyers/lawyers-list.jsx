@@ -1,5 +1,6 @@
+import "./lawyers-list.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { selectLawyers } from "./lawyers-slice";
 import { useSelector } from "react-redux";
@@ -31,8 +32,16 @@ function LawyersList() {
 
   const lawyers = useSelector((state) => selectLawyers(state));
   return (
-    <div>
-      <DataGrid rows={lawyers} columns={columns} onRowClick={handleEvent} />
+    <div className="lawyers-list">
+      <Link to="/lawyers/new" className="link">
+        {t("Add a Lawyer")}
+      </Link>
+      <DataGrid
+        rows={lawyers}
+        columns={columns}
+        onRowClick={handleEvent}
+        getRowId={(row) => row.ssn}
+      />
     </div>
   );
 }

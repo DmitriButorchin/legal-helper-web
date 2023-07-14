@@ -28,7 +28,7 @@ function ClaimNew() {
   const [errors, setErrors] = useState({});
   const [creationDate, setCreationDate] = useState(dayjs());
   const [regionId, setRegionId] = useState("");
-  const [lawyerId, setLawyerId] = useState("");
+  const [lawyerSsn, setLawyerSsn] = useState("");
   const [correspondentId, setCorrespondentId] = useState("");
   const [deadline, setDeadline] = useState(dayjs());
   const regions = useSelector((state) => selectRegions(state));
@@ -45,16 +45,16 @@ function ClaimNew() {
   }
 
   function handleRegionChange(e) {
-    setLawyerId("");
+    setLawyerSsn("");
     setRegionId(e.target.value);
   }
 
   useEffect(() => {
-    setLawyerId(laziestLawyer.id);
+    setLawyerSsn(laziestLawyer.ssn);
   }, [laziestLawyer]);
 
   function handleLawyerChange(e) {
-    setLawyerId(e.target.value);
+    setLawyerSsn(e.target.value);
   }
 
   function handleCorrespondentChange(e) {
@@ -90,7 +90,7 @@ function ClaimNew() {
         variant="standard"
         name="registrationNumber"
         error={!!errors.registrationNumber}
-        helperText={errors.registrationNumber}
+        helperText={t(errors.registrationNumber)}
       />
 
       <FormControl
@@ -114,7 +114,7 @@ function ClaimNew() {
             );
           })}
         </Select>
-        <FormHelperText>{errors.correspondentId}</FormHelperText>
+        <FormHelperText>{t(errors.correspondentId)}</FormHelperText>
       </FormControl>
 
       {/* TODO: add validation*/}
@@ -131,7 +131,7 @@ function ClaimNew() {
         variant="standard"
         name="creationNumber"
         error={!!errors.creationNumber}
-        helperText={errors.creationNumber}
+        helperText={t(errors.creationNumber)}
       />
 
       <TextField
@@ -140,7 +140,7 @@ function ClaimNew() {
         variant="standard"
         name="summary"
         error={!!errors.summary}
-        helperText={errors.summary}
+        helperText={t(errors.summary)}
       />
 
       <TextField
@@ -149,7 +149,7 @@ function ClaimNew() {
         variant="standard"
         name="responsible"
         error={!!errors.responsible}
-        helperText={errors.responsible}
+        helperText={t(errors.responsible)}
       />
 
       <FormControl
@@ -173,31 +173,31 @@ function ClaimNew() {
             );
           })}
         </Select>
-        <FormHelperText>{errors.regionId}</FormHelperText>
+        <FormHelperText>{t(errors.regionId)}</FormHelperText>
       </FormControl>
 
       <FormControl
         required
         variant="standard"
         sx={{ minWidth: 120 }}
-        error={!!errors.lawyerId}
+        error={!!errors.lawyerSsn}
       >
         <InputLabel>{t("Lawyer", { count: 1 })}</InputLabel>
         <Select
-          name="lawyerId"
-          value={lawyerId}
+          name="lawyerSsn"
+          value={lawyerSsn}
           label={t("Lawyer", { count: 1 })}
           onChange={handleLawyerChange}
         >
           {lawyers.map((lawyer) => {
             return (
-              <MenuItem key={lawyer.id} value={lawyer.id}>
+              <MenuItem key={lawyer.ssn} value={lawyer.ssn}>
                 {lawyer.firstName} {lawyer.lastName} ({lawyer.claimCount})
               </MenuItem>
             );
           })}
         </Select>
-        <FormHelperText>{errors.lawyerId}</FormHelperText>
+        <FormHelperText>{t(errors.lawyerSsn)}</FormHelperText>
       </FormControl>
 
       <TextField
@@ -206,7 +206,7 @@ function ClaimNew() {
         variant="standard"
         name="defendant"
         error={!!errors.defendant}
-        helperText={errors.defendant}
+        helperText={t(errors.defendant)}
       />
 
       {/* TODO: add validation*/}

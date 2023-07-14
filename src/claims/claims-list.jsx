@@ -36,7 +36,7 @@ function ClaimsList() {
       headerName: t("Region", { count: 1 }),
     },
     {
-      field: "lawyerId",
+      field: "lawyerSsn",
       flex: 2,
       valueGetter: (params) => lawyersReference[params.value],
       headerName: t("Lawyer", { count: 1 }),

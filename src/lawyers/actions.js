@@ -1,11 +1,19 @@
 import api from "./api";
-import { lawyersReceived, claimAdded } from "./lawyers-slice";
+import { lawyersReceived, claimAdded, lawyerCreated } from "./lawyers-slice";
 
 export const getAllLawyers = () => async (dispatch) => {
   const lawyers = await api.getLawyers();
   dispatch(lawyersReceived(lawyers));
 };
 
-export const addClaim = (lawyerId) => (dispatch) => {
-  dispatch(claimAdded(lawyerId));
+export const addClaim = (lawyerSsn) => (dispatch) => {
+  dispatch(claimAdded(lawyerSsn));
+};
+
+export const createLawyer = (json) => async (dispatch) => {
+  const data = await api.createLawyer(json);
+  if (!data.errors) {
+    dispatch(lawyerCreated(data));
+  }
+  return data;
 };

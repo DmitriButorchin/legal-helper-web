@@ -36,7 +36,7 @@ function RegionNew() {
         variant="standard"
         name="title"
         error={!!errors.title}
-        helperText={errors.title}
+        helperText={t(errors.title)}
       />
 
       <Button variant="outlined" type="submit">

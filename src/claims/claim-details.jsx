@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { selectClaimByNumber } from "./claims-slice";
 import { useSelector } from "react-redux";
 import { selectRegionById } from "../regions/regions-slice";
-import { selectLawyerById } from "../lawyers/lawyers-slice";
+import { selectLawyerBySsn } from "../lawyers/lawyers-slice";
 import { selectCorrespondentById } from "../correspondents/correspondents-slice";
 
 function ClaimDetails() {
@@ -17,7 +17,7 @@ function ClaimDetails() {
     selectRegionById(state, claim.regionId)
   );
   const lawyer = useSelector((state) =>
-    selectLawyerById(state, claim.lawyerId)
+    selectLawyerBySsn(state, claim.lawyerSsn)
   );
   const correspondent = useSelector((state) =>
     selectCorrespondentById(state, claim.correspondentId)

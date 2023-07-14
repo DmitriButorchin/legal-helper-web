@@ -11,7 +11,7 @@ export const createClaim = (json) => async (dispatch) => {
   const data = await api.createClaim(json);
   if (!data.errors) {
     dispatch(claimCreated(data));
-    dispatch(addClaim(data.lawyerId));
+    dispatch(addClaim(data.lawyerSsn));
   }
   return data;
 };
